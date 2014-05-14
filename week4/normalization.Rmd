@@ -1,13 +1,33 @@
+<<<<<<< HEAD
+=======
+---
+layout: page
+title: Normalization
+---
+
+```{r options, echo=FALSE}
+opts_chunk$set(fig.path=paste0("figure/", sub("(.*).Rmd","\\1",basename(knitr:::knit_concord$get('infile'))), "-"))
+```
+
+>>>>>>> upstream/master
 # Normalization
 
 Normalization is one of the most important procedures in genomics data analays. A typical dataset contains more than one sample and we are almost always interested in making comparisons between these. Unfortunately, technical and biological sources of unwanted variation can cloud downstream results. Here we demonstrate with real data, how this can happen and the describe several existing solutions. The examples are based on microarray data but can be applied to other datasets.
 
 Our first example a Dilution dataset that is not publically available. To obtain the dataset you need to request it here: http://www.genelogic.com/support/scientific-studies
 
+<<<<<<< HEAD
 This Dilution dataset has six sets of five technical replicats. The six sets differ in the concentration of RNA. The RNA was diluted 5 times so that 1/2 as much RNA was hybridized in each set. We start by showing  data from five technical replicates. We show boxplots and densities
 ```{r,fig.width=7}
 library(rafalib)
 library(affy)
+=======
+This Dilution dataset has six sets of five technical replicates. The six sets differ in the concentration of RNA. The RNA was diluted 5 times so that 1/2 as much RNA was hybridized in each set. We start by showing  data from five technical replicates. We show boxplots and densities
+```{r,fig.width=7,eval=FALSE}
+library(rafalib)
+library(affy)
+library(affydata)
+>>>>>>> upstream/master
 setwd("/Users/ririzarr/myDocuments/teaching/HarvardX/labs/week4/Dilution")
 pd=read.table("pdata.txt",header=TRUE,check.names=FALSE,as.is=TRUE)
 pd<-pd[which(pd[,3]==0),] ##only liver
@@ -22,7 +42,11 @@ for(i in 1:5)
 
 Notice that although being technical replicates we see different distributions. The shifts in median are quite dramatic with changes of almost 2 fold. To see that simply changing the location by, for example, subtracting the median is not enough we show an MA plot between two of these samples
 
+<<<<<<< HEAD
 ```{r,fig.width=7}
+=======
+```{r,fig.width=7,eval=FALSE}
+>>>>>>> upstream/master
 mypar(1,2)
 i=1;j=2
 x=log2(pms[,i])
@@ -35,7 +59,11 @@ shist(x,unit=0.1,xlab="log (base) intenisty",add=TRUE,col=2)
 
 The MA-plot shows non-linear bias. Median normalization would simple move the plot up so that the median difference is 0. But this will not correct the non-linear bias as demonstrated here
 
+<<<<<<< HEAD
 ```{r,fig.width=7}
+=======
+```{r,fig.width=7,eval=FALSE}
+>>>>>>> upstream/master
 mypar(1,2)
 i=1;j=2
 M=median(c(x,y))
@@ -47,20 +75,37 @@ shist(y,unit=0.1,xlab="log (base) intenisty",col=1,main="smooth histogram")
 shist(x,unit=0.1,xlab="log (base) intenisty",add=TRUE,col=2)
 ```
 
+<<<<<<< HEAD
 To undersand the downstrea consequences of not normalizing we will use the spike-in experiment used in previous units.
+=======
+To undersand the downstream consequences of not normalizing we will use the spike-in experiment used in previous units.
+>>>>>>> upstream/master
 ```{r,fig.width=7}
 library(SpikeIn)
 data(SpikeIn95)
 spms<-pm(SpikeIn95)
 spd=pData(SpikeIn95)
+<<<<<<< HEAD
 mypar(1,2)
 shist(log2(spms[,2]),unit=0.1,type="n",xlab="log (base 2) intensity",main="Five techical replicates")
 for(i in 1:10) ##show the first 10
+=======
+library(rafalib)
+mypar(1,2)
+shist(log2(spms[,2]),unit=0.1,type="n",xlab="log (base 2) intensity",main="Five techical replicates")
+##show the first 10
+for(i in 1:10) 
+>>>>>>> upstream/master
   shist(log2(spms[,i]),unit=0.1,col=i,add=TRUE,lwd=2,lty=i)
 ##Pick 9 and 10 and make an MA plot
 i=10;j=9 ##example with two samples
 siNames<-colnames(spd)
+<<<<<<< HEAD
 siNames=siNames[which(spd[i,]/spd[j,]==2)] ##show probes with expected FC=2
+=======
+##show probes with expected FC=2
+siNames=siNames[which(spd[i,]/spd[j,]==2)] 
+>>>>>>> upstream/master
 M=log2(spms[,i])-log2(spms[,j])
 A=(log2(spms[,i])+log2(spms[,j]))/2
 splot(A,M,ylim=c(-1.5,1.5))
@@ -72,7 +117,11 @@ In this plot the green dots are genes spiked in to be different in the two sampl
 
 ## Loess normalization
 
+<<<<<<< HEAD
 In the MA-plot above we see a non-linear bias in the M that changes as function of A. The general idea behind loess normalization is to estimate this bias and remove it. Because the bias a curve of no obvious parametric form (it is not a line or parabola or a sine function, etc..) We want to fit a curve to the data. Local weighted regression [CITE] (loess) provides one way to do this. Loess is inspired by Taylor's theorem that in practice means that at any given point, if one looks at a small enough region around that point, the curve looks like a parabolla. If you look even closer it looks like a straight line (note that gardeners can make a curved edge with a straight shovel). 
+=======
+In the MA-plot above we see a non-linear bias in the M that changes as function of A. The general idea behind loess normalization is to estimate this bias and remove it. Because the bias a curve of no obvious parametric form (it is not a line or parabola or a sine function, etc..) We want to fit a curve to the data. Local weighted regression ([loess](#foot)) provides one way to do this. Loess is inspired by Taylor's theorem that in practice means that at any given point, if one looks at a small enough region around that point, the curve looks like a parabolla. If you look even closer it looks like a straight line (note that gardeners can make a curved edge with a straight shovel). 
+>>>>>>> upstream/master
 
 Loess takes advantage of this mathematical property of functions. For each point in your data set a region is defined considered to be small enough to assume the curve approximated by a line in that region and a line is fit with weighted least squares. The weights depend on the distance from the point of interest. The robuse version of loess also down weighs points considered to be outliers. The following code makes an annimation that shows loess at work:
 ```{r}
@@ -84,6 +133,7 @@ centers <- seq(min(a),max(a),0.1)
 plot(a,m,ylim=c(-1.5,1.5),col="grey")
 windowSize<-1.5
 smooth<-rep(NA,length(centers))
+<<<<<<< HEAD
 library(animation)
 saveGIF({
   for(i in seq(along=centers)){
@@ -100,6 +150,24 @@ saveGIF({
   }
   }
 },'loess.gif', interval = .15)
+=======
+#library(animation)
+# saveGIF({
+#   for(i in seq(along=centers)){
+#   center<-centers[i]
+#   ind=which(a>center-windowSize & a<center+windowSize)
+#   fit<-lm(m~a,subset=ind)
+#   smooth[i]<-predict(fit,newdata=data.frame(a=center))
+#   if(center<12){
+#     plot(a,m,ylim=c(-1.5,1.5),col="grey")
+#     points(a[ind],m[ind])
+#     abline(fit,col=3,lty=2,lwd=2)
+#     lines(centers[1:i],smooth[1:i],col=2,lwd=2)
+#     points(centers[i],smooth[i],col=2,pch=16)
+#   }
+#   }
+# },'loess.gif', interval = .15)
+>>>>>>> upstream/master
 ##Final version
 plot(a,m,ylim=c(-1.5,1.5))
 lines(centers,smooth,col=2,lwd=2)
@@ -147,7 +215,11 @@ Homework: try different values of span of 0.75 and change the degree. Decide whi
 
 ## Quantile normalization
 
+<<<<<<< HEAD
 One limitation of loess normalization is that it depeneds on pairings of samples. We have this for two color arrays, but for other platforms, such as Affymetrix, we do not have such pairings. Quantile normalization [CITE] offers a solution that is more generally applicable.
+=======
+One limitation of loess normalization is that it depeneds on pairings of samples. We have this for two color arrays, but for other platforms, such as Affymetrix, we do not have such pairings. [Quantile normalization](#foot) offers a solution that is more generally applicable.
+>>>>>>> upstream/master
 
 The smooth histogram plots demonstrate that different samples have different distributions, not just median shifts. This happens even when we look at data from replicated RNA. Qunatile normalization forces all these distributions the same: it makes each quantile (not just the median) the same across samples. The algorithm, as implemeted in Biocondcutor, does the following for a matrix with rows representing genes and columns representing samples
 
@@ -190,12 +262,20 @@ Note how quantile normalization also fixes the bias but keeps the spiked-in gene
 
 ## VSN
 
+<<<<<<< HEAD
 In the background unit we learned that the background noise appears to be additive. However, shifts we see that explain some of the need for normalization appear to be multiplicative terms. Also we have observed a strong mean and variance relationship that is in agreement with multiplicative error. Varianze stabilizing normalization (vsn) motivates the need for normalization with an additive backgroun multiplicative noise model:
+=======
+In the background unit we learned that the background noise appears to be additive. However, shifts we see that explain some of the need for normalization appear to be multiplicative terms. Also we have observed a strong mean and variance relationship that is in agreement with multiplicative error. [Varianze stabilizing normalization](#foot) (vsn) motivates the need for normalization with an additive backgroun multiplicative noise model:
+>>>>>>> upstream/master
 
 $$
 Y_{ij}= \beta_i + \varepsilon_{ij} + A_i \theta_{j} \eta_{ij}
 $$
+<<<<<<< HEAD
 The expression level we are interested in estimating is $\theta_j$ which we assume changes across genes $j$ is the same across array $i$. Here, $\beta_i$ is an array specific background level that changes from probe to probe due to additive noise $\varepsilon_{ij}. We refer to $A_i$ and the gain and note that it changes from array to array.  Here is a monte carlo simulation demonstrating that by changing $\beta$ and $A$ we can generate non-linear biases as we see in practice.
+=======
+The expression level we are interested in estimating is $\theta_j$ which we assume changes across genes $j$ is the same across array $i$. Here, $\beta_i$ is an array specific background level that changes from probe to probe due to additive noise $\varepsilon_{ij}$. We refer to $A_i$ and the gain and note that it changes from array to array.  Here is a monte carlo simulation demonstrating that by changing $\beta$ and $A$ we can generate non-linear biases as we see in practice.
+>>>>>>> upstream/master
 ```{r}
 library(rafalib)
 N=10000
@@ -215,7 +295,11 @@ For this type of data, the variance depends on the mean. We seek a transfromatio
 ny1=(y1-b1)/A1
 ny2=(y2-b2)/A2
 mypar(1,2)
+<<<<<<< HEAD
 maplot(ny1,ny2,curve.add=FALE,ylim=c(-500,500))
+=======
+maplot(ny1,ny2,curve.add=FALSE,ylim=c(-500,500))
+>>>>>>> upstream/master
 maplot(log2(ny1),log2(ny2),ylim=c(-2,2),xlim=c(0,15))
 ```
 
@@ -227,7 +311,11 @@ $$
 In the case of the model above we can derive the following transformation 
 
 $$
+<<<<<<< HEAD
 \mbox{arsinh}(y) = \log\left\{y + \sqrt{y^2+1} \right\}
+=======
+\mbox{arsinh}(y) = \log\left(y + \sqrt{y^2+1} \right)
+>>>>>>> upstream/master
 $$
 
 The vsn library implements this apprach. It estimates $\beta$ and $A$ by assuming that most genes don't change, i.e. the $\theta$ does not depend on $i$.
@@ -251,7 +339,12 @@ We notice that it corrects the bias in a similar way to loess and quantile norma
 ## RNA-seq
 
 ```{r}
+<<<<<<< HEAD
 load("/Users/ririzarr/myDocuments/teaching/HarvardX/genomicsclass/week4/bottomly_sumexp.RData")
+=======
+library(dagdata)
+data(bottomly)
+>>>>>>> upstream/master
 library(GenomicRanges)
 f <- assay(bottomly)
 pd <- colData(bottomly)
@@ -296,7 +389,12 @@ for(i in 1:20)
 
 
 ```{r}
+<<<<<<< HEAD
 load("/Users/ririzarr/myDocuments/teaching/HarvardX/genomicsclass/week4/pickrell_sumexp.RData")
+=======
+library(dagdata)
+data(pickrell)
+>>>>>>> upstream/master
 library(GenomicRanges)
 library(rafalib)
 f <- assay(pickrell)
@@ -470,6 +568,7 @@ abline(h=0)
 
 ```
 
+<<<<<<< HEAD
 
 
 
@@ -477,3 +576,33 @@ abline(h=0)
 
 
 
+=======
+## Footnotes
+<a name="foot"></a>
+
+### loess
+
+W. S. Cleveland, E. Grosse and W. M. Shyu (1992) Local regression models. Chapter 8 of Statistical Models in S eds J.M. Chambers and T.J. Hastie, Wadsworth & Brooks/Cole.
+
+### Quantile normalization
+
+Bolstad BM, Irizarry RA, Astrand M, Speed TP. "A comparison of normalization methods for high density oligonucleotide array data based on variance and bias." Bioinformatics. 2003. <http://www.ncbi.nlm.nih.gov/pubmed/12538238>
+
+### Variance stabilization
+
+For microarray:
+
+Wolfgang Huber, Anja von Heydebreck, Holger Sültmann, Annemarie Poustka and Martin Vingron, "Variance stabilization applied to microarray data calibration and to the quantification of differential expression" Bioinformatics, 2002. <http://bioinformatics.oxfordjournals.org/content/18/suppl_1/S96.short>
+
+B.P. Durbin, J.S. Hardin, D.M. Hawkins and D.M. Rocke, "A variance-stabilizing transformation for gene-expression microarray data", Bioinformatics. 2002. <http://bioinformatics.oxfordjournals.org/content/18/suppl_1/S105>
+
+Wolfgang Huber, Anja von Heydebreck, Holger Sueltmann, Annemarie Poustka, Martin Vingron, "Parameter estimation for the calibration and variance stabilization of microarray data" Stat Appl Mol Biol Genet, 2003. <http://dx.doi.org/10.2202/1544-6115.1008>
+
+For NGS read counts:
+
+Simon Anders and Wolfgang Huber, "Differential expression analysis for sequence count data", Genome Biology, 2010. <http://genomebiology.com/2010/11/10/r106>
+
+General discussion of variance stabilization:
+
+Robert Tibshirani, "Variance Stabilization and the Bootstrap" Biometrika, 1988. <http://www.jstor.org/discover/10.2307/2336593>
+>>>>>>> upstream/master

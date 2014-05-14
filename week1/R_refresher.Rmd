@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 # R refresher
+=======
+---
+layout: page
+title: R refresher
+---
+
+>>>>>>> upstream/master
 
 ## Data summaries: summary, str
 

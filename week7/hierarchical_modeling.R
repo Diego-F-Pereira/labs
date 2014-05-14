@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+=======
+---
+layout: page
+title: Hiearchical modeling
+---
+
+```{r options, echo=FALSE}
+opts_chunk$set(fig.path=paste0("figure/", sub("(.*).Rmd","\\1",basename(knitr:::knit_concord$get('infile'))), "-"))
+```
+
+```{r}
+>>>>>>> upstream/master
 # biocLite("SpikeInSubset")
 library(SpikeInSubset)
 data(rma95)
@@ -18,7 +31,13 @@ tt$s <- apply(exprs(rma95), 1, function(row) sqrt(.5 * (var(row[1:3]) + var(row[
 with(tt, plot(s, -log10(p.value), cex=.8, pch=16,
               log="x",xlab="estimate of standard deviation",
               col=cols))
+<<<<<<< HEAD
 
+=======
+```
+
+```{r}
+>>>>>>> upstream/master
 library(limma)
 fit <- lmFit(rma95, model.matrix(~ fac))
 ebfit <- ebayes(fit)
@@ -27,8 +46,14 @@ with(limmares, plot(dm, -log10(p.value),cex=.8, pch=16,
      col=cols,xlab="difference in means",
      xlim=c(-1,1), ylim=c(0,5)))
 abline(h=2,v=c(-.2,.2), lty=2)
+<<<<<<< HEAD
 
 
+=======
+```
+
+```{r}
+>>>>>>> upstream/master
 n <- 40
 qs <- seq(from=0,to=.2,length=n)
 idx <- sapply(seq_len(n),function(i) which(as.integer(cut(tt$s^2,qs)) == i)[1])
@@ -39,4 +64,8 @@ plot(1,1,xlim=c(0,.21),ylim=c(0,1),type="n",
 axis(2,at=c(.1,.9),c("before","after"),las=2)
 segments((tt$s^2)[idx],rep(.1,n),
          ebfit$s2.post[idx],rep(.9,n))
+<<<<<<< HEAD
 
+=======
+```
+>>>>>>> upstream/master

@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+=======
+---
+layout: page
+title: Modeling
+---
+
+```{r options, echo=FALSE}
+opts_chunk$set(fig.path=paste0("figure/", sub("(.*).Rmd","\\1",basename(knitr:::knit_concord$get('infile'))), "-"))
+```
+
+>>>>>>> upstream/master
 # Modeling
 
 "All models are wrong, but some are useful" -George E. P. Box
@@ -13,7 +25,11 @@ qqnorm(nonsmokers)
 qqline(nonsmokers)
 ```
 
+<<<<<<< HEAD
 But this doesn not imply that every dataset we collect will follow a normal distribtion. Example are: coin tosses, the numner of people who win the lottery, and US incomes.The normal is not the only parametric distribution that is available from modeling. Here we show we describe some useful parametric distribution and their use in genomics. For many more please consult these books [CITE books]
+=======
+But this does not imply that every dataset we collect will follow a normal distribtion. Example are: coin tosses, the number of people who win the lottery, and US incomes.The normal is not the only parametric distribution that is available from modeling. Here we show we describe some useful parametric distribution and their use in genomics. 
+>>>>>>> upstream/master
 
 ## The Binomial distribution
 
@@ -46,7 +62,11 @@ $$
 The Poisson distribution is commonly used in RNAseq analyses. Note that because we are sampling thousands moleculues and for some genes represent are a very small proportion of the totality of molecules, the Poisson distribution seems appropriate. 
 
 Homework
+<<<<<<< HEAD
 1- Do you expect a Poisson distribution with $\lambda=100$ to be approximately nomral? Why or why not? 
+=======
+1- Do you expect a Poisson distribution with $\lambda=100$ to be approximately normal? Why or why not? 
+>>>>>>> upstream/master
 
 
 So how does this help us? One way is that it informs us of the statistical properties of important summaries. For example, say we only have one sample from each of a case and control RNAseq experiment and we want to report the genes with larges fold-chages. Note that under the null, that there are no differences, the statistical variability of this quantity depends on the total abundance of the gene. We can show this mathematically but here is a quick simulation to demonstrate the point:
@@ -56,6 +76,10 @@ lambdas=2^seq(1,16,len=N) ##these are the true abundances of genes
 y=rpois(N,lambdas)##note that the null hypothesis is true for all genes
 x=rpois(N,lambdas) 
 ind=which(y>0 & x>0)##make sure no 0s due to ratio and log
+<<<<<<< HEAD
+=======
+library(rafalib)
+>>>>>>> upstream/master
 splot(log2(lambdas),log2(y/x),subset=ind)
 ```
 Note that for lower values of lambda there is much more variability and that if we were to report anything with a fold change of 2 or more the number of false positives would be quite high for low.
@@ -120,7 +144,11 @@ $$
 $$
 The MLE is the value of lambda that maximizes the _likeihlood_. 
 $$
+<<<<<<< HEAD
 L(\lambda; X_1=k_1,\dots,X_n=k_1)=\exp\left\{\sum_{i=1}^n \log \Pr(X_i=k_i;\lambda)\right\}
+=======
+L(\lambda; X_1=k_1,\dots,X_n=k_1)=\exp\left(\sum_{i=1}^n \log \Pr(X_i=k_i;\lambda)\right)
+>>>>>>> upstream/master
 $$
 In practice it is more convinient to maximize the log-likeilhood
 ```{r}
@@ -184,7 +212,11 @@ There are parametric distributions that posses these properties (striclty positi
 $$
 f(x;\alpha,\beta)=\frac{\beta^\alpha x^{\alpha-1}\exp{-\beta x}}{\Gamma(\alpha)}
 $$
+<<<<<<< HEAD
 Itis defined by two parameters $\alpha$ and $\beta$ that can, indirectly, control location and scale. They also control the shape of the distribution. For more on this distribution please refer [CITE BOOKs]. 
+=======
+Itis defined by two parameters $\alpha$ and $\beta$ that can, indirectly, control location and scale. They also control the shape of the distribution. The [Wikipedia article](http://en.wikipedia.org/wiki/Gamma_distribution) describes many of the properties of the gamma distribution.
+>>>>>>> upstream/master
 
 Two special cases of the gamma distribution are the chi-sqaured distribution, which we used earlier to analyze a 2x2 table and the exponential distribution which we will use later in this section. For chi-square we $\alpha=\nu/2$ and $\beta=2$ with $\nu$ the degrees of freedom. For exponential we have $\alpha=1$ and $\beta=\lambda$ the rate.
 
@@ -216,7 +248,11 @@ for(d in c(1,5,10)){
     }
   }
 ```
+<<<<<<< HEAD
 Now which $s_0$ and $d$ fit our data best? This is a rather advanced to topic as the MLE does not perform well for this particular distribution (we refer to Smyth (2004)). The Bioconductor limma package provides a function to estimate these parameters
+=======
+Now which $s_0$ and $d$ fit our data best? This is a rather advanced to topic as the MLE does not perform well for this particular distribution (we refer to the statistical method described in [Smyth (2004)](#foot)). The Bioconductor limma package provides a function to estimate these parameters
+>>>>>>> upstream/master
 
 ```{r}
 library(limma)
@@ -234,3 +270,11 @@ k=sum(tmp$density)/sum(dd) ##a normalizing constant to assure same area in plot
 lines(sds,dd*k,type="l",col=2,lwd=2)
 ```
 Apart for one outlier, this is not a bad fit at all. This approximation will come in very handy when we learn about emprical Bayes.
+<<<<<<< HEAD
+=======
+
+## Footnotes
+<a name="foot"></a>
+
+Smyth GK, "Linear models and empirical bayes methods for assessing differential expression in microarray experiments". Stat Appl Genet Mol Biol. 2004 <http://www.ncbi.nlm.nih.gov/pubmed/16646809>
+>>>>>>> upstream/master

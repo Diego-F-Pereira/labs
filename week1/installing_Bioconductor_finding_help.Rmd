@@ -1,4 +1,7 @@
-# Installing Bioconductor and finding help
+---
+layout: page
+title: Installing Bioconductor and finding help
+---
 
 ## Installing Bioconductor
 
@@ -61,6 +64,7 @@ methods(class="lm")
 
 A quick way to look up functions in a given package is to write out the package name, two ":" symbols and then trying tab-completion to get a list of functions, exported or not.
 
+<<<<<<< HEAD
 ```{r, eval=FALSE, tidy=FALSE}
 library(geneplotter)
 geneplotter::
@@ -74,6 +78,24 @@ You can find the source code for many functions by typing out the name of the fu
 mad
 ```
 
+=======
+```{r}
+library(geneplotter)
+```
+
+```{r, eval=FALSE, tidy=FALSE}
+geneplotter::
+```
+
+## Source code
+
+You can find the source code for many functions by typing out the name of the function with () and pressing enter.
+
+```{r}
+mad
+```
+
+>>>>>>> upstream/master
 You might have to specify a particular class if you want source code for a method:
 
 ```{r}
