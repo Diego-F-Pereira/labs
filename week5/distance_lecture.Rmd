@@ -318,6 +318,7 @@ for(i in ind){
   }
 ```
 
+<<<<<<< HEAD
 
 ##Home work: genotype SNPs using k-means
 
@@ -329,6 +330,9 @@ for(i in ind){
 =======
 ## Footnotes
 <a name="foot"></a>
+=======
+## Footnotes <a name="foot"></a>
+>>>>>>> upstream/master
 
 ### MDS references
 
@@ -346,4 +350,7 @@ a subset of the most recent references from `?hclust`:
 
 - Legendre, P. and L. Legendre (2012). Numerical Ecology, 3rd English ed. Amsterdam: Elsevier Science BV.
 - Murtagh, F. and Legendre, P. (2013). Ward's hierarchical agglomerative clustering method: which algorithms implement Ward's criterion? Journal of Classification (in press).
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
 >>>>>>> upstream/master

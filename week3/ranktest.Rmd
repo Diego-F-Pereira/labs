@@ -233,8 +233,7 @@ In a later module we will leanr statistical techniques from improving the standa
 ind
 ```
 
-## Footnotes
-<a name="foot"></a>
+## Footnotes <a name="foot"></a>
 
 C. Kendziorski, R. A. Irizarry, K.-S. Chen, J. D. Haag, and M. N. Gould, "On the utility of pooling biological samples in microarray experiments", PNAS, 2005. <http://www.pnas.org/content/102/12/4252.long>
 >>>>>>> upstream/master

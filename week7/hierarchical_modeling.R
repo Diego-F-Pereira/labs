@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 ---
 layout: page
@@ -10,6 +11,11 @@ opts_chunk$set(fig.path=paste0("figure/", sub("(.*).Rmd","\\1",basename(knitr:::
 ```
 
 ```{r}
+>>>>>>> upstream/master
+=======
+# The following script produces the plots seen in the hierarchical modeling lecture.
+# These are also produced in the using_limma.Rmd file.
+
 >>>>>>> upstream/master
 # biocLite("SpikeInSubset")
 library(SpikeInSubset)
@@ -32,11 +38,15 @@ with(tt, plot(s, -log10(p.value), cex=.8, pch=16,
               log="x",xlab="estimate of standard deviation",
               col=cols))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 ```
 
 ```{r}
+>>>>>>> upstream/master
+=======
+
 >>>>>>> upstream/master
 library(limma)
 fit <- lmFit(rma95, model.matrix(~ fac))
@@ -47,12 +57,17 @@ with(limmares, plot(dm, -log10(p.value),cex=.8, pch=16,
      xlim=c(-1,1), ylim=c(0,5)))
 abline(h=2,v=c(-.2,.2), lty=2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
 ```
 
 ```{r}
+>>>>>>> upstream/master
+=======
+
+
 >>>>>>> upstream/master
 n <- 40
 qs <- seq(from=0,to=.2,length=n)
@@ -65,7 +80,11 @@ axis(2,at=c(.1,.9),c("before","after"),las=2)
 segments((tt$s^2)[idx],rep(.1,n),
          ebfit$s2.post[idx],rep(.9,n))
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 ```
+>>>>>>> upstream/master
+=======
+
 >>>>>>> upstream/master

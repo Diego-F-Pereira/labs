@@ -569,6 +569,7 @@ abline(h=0)
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -579,6 +580,9 @@ abline(h=0)
 =======
 ## Footnotes
 <a name="foot"></a>
+=======
+## Footnotes <a name="foot"></a>
+>>>>>>> upstream/master
 
 ### loess
 
